@@ -83,14 +83,15 @@ function love.load()
     }
 
     player = Player.new(500, 100, npcs)
-
+--[[
     dialogManager = DialogManager
     dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
     dialogManager:displayText([[I have two piles of apples. 
         A pile has one · apple (who said piles must have multiple things?). 
         The other pile has two ·· apples. 
-        If I put the two piles together, how many apples does the new pile have.]])
+        If I put the two piles together, how many apples does the new pile have.]]--[[)
     QuestionManager.askQuestion('blud')
+    ]]
     beginningDialog()
 end
 
@@ -112,11 +113,14 @@ function love.draw()
     love.graphics.translate(love.graphics.getWidth()/2 - player.x,
                             love.graphics.getHeight()/2 - player.y)
     
-    love.graphics.draw(images.background, -1000, -1000)
+    love.graphics.draw(images.background, -1000, 0, 0, 1.5, 1.5)
     love.graphics.rectangle('fill', -1000, -1000, 1000, 3000)
     love.graphics.rectangle('fill', 1000, -1000, 1000, 3000)
     love.graphics.rectangle('fill', -1000, -1000, 2000, 1000)
     love.graphics.rectangle('fill', -1000, mapHeight, 4000, 1000)
+    love.graphics.setColor(0,0,0)
+    love.graphics.rectangle('line', 0, 0, mapWidth, mapHeight)
+    love.graphics.setColor(1,1,1)
     player:draw()
     for _, npc in pairs(npcs) do
         npc:draw()
