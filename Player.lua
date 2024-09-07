@@ -4,20 +4,22 @@ local images = require 'images'
 local Player = {}
 Player.__index = Player
 
+local PLAYER_SPEED = 150
+
 function Player.new(x, y)
     local self = setmetatable({}, Player)
     self.x = x
     self.y = y
-    self.speed = 150
+    self.speed = PLAYER_SPEED
     self.horizontalFlip = 1
 
     local animationGrid = anim8.newGrid(
         128, 128, images.player:getWidth(), images.player:getHeight()
     )
     self.animation = anim8.newAnimation(animationGrid('1-2',1), 0.1)
+
     return self
 end
-
 function Player:update(dt)
     local isAnimationPlaying = false
     if love.keyboard.isScancodeDown('a', 'left') then
