@@ -68,10 +68,15 @@ function love.keypressed(key, scancode)
 end
 
 function love.draw()
+    love.graphics.translate(love.graphics.getWidth()/2 - player.x,
+                            love.graphics.getHeight()/2 - player.y)
+    love.graphics.draw(images.background, -1000, -1000)
     player:draw()
     for _, npc in pairs(npcs) do
         npc:draw()
     end
+    love.graphics.origin()
+
     love.graphics.setColor(0, 0, 0)
     QuestionManager.draw()
     love.graphics.setColor(1, 1, 1)
