@@ -5,6 +5,8 @@ local QuestionManager = require 'Question'
 
 
 function love.load()
+    love.graphics.setBackgroundColor(1, 1, 1)
+    
     player = Player.new(0, 0)
     QuestionManager.askQuestion('bro', 'blud')
 end
