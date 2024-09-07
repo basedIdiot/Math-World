@@ -1,5 +1,7 @@
 local QuestionManager = {}
 
+local utf8 = require("utf8")
+
 local isAskingQuestion = false
 currentQuestion = ''
 currentAnswer = ''
@@ -21,19 +23,15 @@ function QuestionManager.answerQuestion()
     end
     return false
 end
-function QuestionManager.update()
+function QuestionManager.keypressed(key)
     if not isAskingQuestion then return end
-    if love2d.keyboard.isDown('backspace') then
+    if key == 'backspace' then
         -- get the byte offset to the last UTF-8 character in the string.
-        local byteoffset = utf8.offset(text, -1)
-
-        if byteoffset then
-            -- remove the last UTF-8 character.
-            -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
-            QuestionManager.setCurrentAnswer(string.sub(currentAnswer, 1, byteoffset - 1))
-        end
+        -- remove the last UTF-8 character.
+        -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
+        QuestionManager.setCurrentAnswer(string.sub(currentAnswer, 1, #currentAnswer - 1))
     end
-    if love2d.keyboard.isDown('enter') then
+    if key == 'return' then
         QuestionManager.answerQuestion()
     end
 end

@@ -11,7 +11,10 @@ end
 
 function love.update(dt)
     player:update(dt)
-    QuestionManager.update()
+end
+
+function love.keypressed(key, scancode)
+    QuestionManager.keypressed(scancode)
 end
 
 function love.draw()
