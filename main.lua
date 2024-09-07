@@ -3,6 +3,7 @@ local NPC = require 'NPC'
 local QuestionManager = require 'QuestionManager'
 local dialogManager   = require 'DialogManager'
 local AdditionDialog  = require 'AdditionDialog'
+local images          = require 'images'
 
 -- Haiiii justin please send help
 
@@ -26,8 +27,20 @@ function love.load()
     love.graphics.setBackgroundColor(1, 1, 1)
     
     npcs = {
-        plusSignNPC = NPC.new(100, 200, 64, function()
+        addition = NPC.new(100, 200, 64, images.addition, function()
             dialogManager:displayText("Hello!")
+        end),
+        subtraction = NPC.new(250, 200, 64, images.subtraction, function()
+            dialogManager:displayText("hehehe")
+        end),
+        division = NPC.new(400, 200, 64, images.division, function()
+            dialogManager:displayText('bruh')
+        end),
+        multiplication = NPC.new(550, 200, 64, images.multiplication, function()
+            dialogManager:displayText('bruh')
+        end),
+        mathSymbol = NPC.new(600, 600, 128, images.mathSymbol, function()
+            dialogManager:displayText("be not afraid")
         end)
     }
 
