@@ -8,14 +8,16 @@ local additionDialog = {
         If I put the two piles together, how many apples does the new pile have.
         ]], 
         answers = {"three", "3"},
-        response = "Nice work. Remember your counting, and it wil ltake you rather far."
+        rightResponse = "Nice work. Remember your counting, and it wil ltake you rather far.",
+        wrongResponse = "Hmmm. I am merciful. Try again. Remember your counting!"
     },
     {
         question = [[Ok, same pile of apples from the last question.
         If I add an empty pile of apples, how many apples with the new pile have?
         ]], 
         answers = {"three", "3"},
-        response = "Of course! That's what adding zero (or nothing) does! Some people didn't like zero too much, but they're gone now."
+        rightResponse = "Of course! That's what adding zero (or nothing) does! Some people didn't like zero too much, but they're gone now.",
+        wrongResponse = "Hmmm. What happens to the number of apples if I do nothing to the pile?"
     },
 
 }
