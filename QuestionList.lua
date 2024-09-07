@@ -4,7 +4,7 @@ local additionQuestions = {
         question = [[I have two piles of apples. 
         A pile has one · apple (who said piles must have multiple things?). 
         The other pile has two ·· apples. 
-        If I put the two piles together, how many apples does the new pile have."
+        If I put the two piles together, how many apples does the new pile have.
         ]], 
         answers = {"three", "3"},
         response = "Nice work. Remember your counting, and it wil ltake you rather far."

@@ -10,8 +10,12 @@ function love.load()
     
     player = Player.new(0, 0)
     dialogManager = DialogManager.new()
-    dialogManager:displayText('bruh', 'hehe')
-    QuestionManager.askQuestion('bro', 'blud')
+    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
+    dialogManager:displayText([[I have two piles of apples. 
+        A pile has one · apple (who said piles must have multiple things?). 
+        The other pile has two ·· apples. 
+        If I put the two piles together, how many apples does the new pile have.]])
+    QuestionManager.askQuestion('blud')
 end
 
 function love.update(dt)
