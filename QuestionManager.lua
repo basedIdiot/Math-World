@@ -14,8 +14,6 @@ function QuestionManager.askQuestion(answers)
     correctAnswer = answers
 end
 function QuestionManager.answerQuestion()
-    love.keyboard.setTextInput(false)
-    isAskingQuestion = false
     for _, correctAnswer in ipairs(correctAnswer) do
         if string.lower(currentAnswer) == correctAnswer then
             QuestionManager.clearQuestion()
