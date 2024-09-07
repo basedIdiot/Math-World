@@ -42,7 +42,6 @@ function QuestionManager.setCurrentAnswer(answer)
     currentAnswer = answer
 end
 function love.textinput(t)
-    print(currentAnswer)
     QuestionManager.setCurrentAnswer(currentAnswer .. t)
 end
 return QuestionManager

@@ -21,5 +21,7 @@ end
 
 function love.draw()
     player:draw()
+    love.graphics.setColor(0, 0, 0)
     QuestionManager.draw()
+    love.graphics.setColor(1, 1, 1)
 end
