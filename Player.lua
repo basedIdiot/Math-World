@@ -1,14 +1,14 @@
 local Player = {}
 Player.__index = Player
 
+local PLAYER_SPEED = 150
 function Player.new(x, y)
     local self = setmetatable({}, Player)
     self.x = x
     self.y = y
-    self.speed = 150
+    self.speed = PLAYER_SPEED
     return self
 end
-
 function Player:update(dt)
     if love.keyboard.isScancodeDown('a', 'left') then
         self.x = self.x - self.speed * dt

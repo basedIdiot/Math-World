@@ -1,13 +1,16 @@
 local QuestionManager = {}
 
 local isAskingQuestion = false
+currentQuestion = ''
+currentAnswer = ''
 local correctAnswer
-local currentAnswer = ''
+
 
 love.keyboard.setTextInput(false)
-function QuestionManager.askQuestion(answer)
+function QuestionManager.askQuestion(question, answer)
     love.keyboard.setTextInput(true)
     isAskingQuestion = true
+    currentQuestion = question
     correctAnswer = answer
 end
 function QuestionManager.answerQuestion()
@@ -18,15 +21,9 @@ function QuestionManager.answerQuestion()
     end
     return false
 end
-function QuestionManager.setCurrentAnswer(answer)
-    currentAnswer = answer
-end
-function love.textinput(t)
-    QuestionManager.setCurrentAnswer(currentAnswer .. t)
-end
-function love.keypressed(key)
+function QuestionManager.update()
     if not isAskingQuestion then return end
-    if key == 'backspace' then
+    if love2d.keyboard.isDown('backspace') then
         -- get the byte offset to the last UTF-8 character in the string.
         local byteoffset = utf8.offset(text, -1)
 
@@ -36,5 +33,18 @@ function love.keypressed(key)
             QuestionManager.setCurrentAnswer(string.sub(currentAnswer, 1, byteoffset - 1))
         end
     end
+    if love2d.keyboard.isDown('enter') then
+        QuestionManager.answerQuestion()
+    end
+end
+function QuestionManager.draw()
+    love.graphics.print(currentAnswer, 100, 100)
+end
+function QuestionManager.setCurrentAnswer(answer)
+    currentAnswer = answer
+end
+function love.textinput(t)
+    print(currentAnswer)
+    QuestionManager.setCurrentAnswer(currentAnswer .. t)
 end
 return QuestionManager
