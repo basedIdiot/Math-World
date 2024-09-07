@@ -1,5 +1,5 @@
 local Player = require 'Player'
-local QuestionManager = require 'Question'
+local QuestionManager = require 'QuestionManager'
 local DialogManager   = require 'DialogManager'
 
 -- Haiiii justin please send help
