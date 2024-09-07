@@ -9,17 +9,19 @@ local correctAnswer
 
 
 love.keyboard.setTextInput(false)
-function QuestionManager.askQuestion(question, answer)
+function QuestionManager.askQuestion(question, answers)
     love.keyboard.setTextInput(true)
     isAskingQuestion = true
     currentQuestion = question
-    correctAnswer = answer
+    correctAnswer = answers
 end
 function QuestionManager.answerQuestion()
     love.keyboard.setTextInput(false)
     isAskingQuestion = false
-    if string.lower(currentAnswer) == correctAnswer then
-        return true
+    for _, correctAnswer in ipairs(correctAnswer) do
+        if string.lower(currentAnswer) == correctAnswer then
+            return true
+        end
     end
     return false
 end
