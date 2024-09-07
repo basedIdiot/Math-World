@@ -44,6 +44,8 @@ end
 
 function love.update(dt)
     player:update(dt)
+    -- this code looks kinda bad, but dont worry abt it 
+    player.isPaused = #dialogManager.textSequence > 0
 end
 
 function love.keypressed(key, scancode)
