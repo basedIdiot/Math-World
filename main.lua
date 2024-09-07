@@ -1,16 +1,23 @@
 local Player = require 'Player'
 local NPC = require 'NPC'
-local QuestionManager = require 'Question'
+local QuestionManager = require 'QuestionManager'
 local DialogManager   = require 'DialogManager'
 
 -- Haiiii justin please send help
 
+local npcs
 
 function love.load()
     love.graphics.setBackgroundColor(1, 1, 1)
     
-    player = Player.new(0, 0)
-    plusSignNPC = NPC.new(100, 200)
+    npcs = {
+        plusSignNPC = NPC.new(100, 200, 64, function()
+            dialogManager:displayText("Hello!")
+        end)
+    }
+
+    player = Player.new(0, 0, npcs)
+
     dialogManager = DialogManager.new()
     dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
     dialogManager:displayText([[I have two piles of apples. 
@@ -27,11 +34,14 @@ end
 function love.keypressed(key, scancode)
     QuestionManager.keypressed(scancode)
     dialogManager:keypressed(scancode)
+    player:keypressed(scancode)
 end
 
 function love.draw()
     player:draw()
-    plusSignNPC:draw()
+    for _, npc in pairs(npcs) do
+        npc:draw()
+    end
     love.graphics.setColor(0, 0, 0)
     QuestionManager.draw()
     love.graphics.setColor(1, 1, 1)

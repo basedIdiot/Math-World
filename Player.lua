@@ -6,11 +6,14 @@ Player.__index = Player
 
 local PLAYER_SPEED = 150
 
-function Player.new(x, y)
+function Player.new(x, y, npcs)
     local self = setmetatable({}, Player)
+    self.npcs = npcs
+
     self.x = x
     self.y = y
     self.speed = PLAYER_SPEED
+    self.radius = 32
     self.horizontalFlip = 1
 
     local animationGrid = anim8.newGrid(
@@ -41,6 +44,16 @@ function Player:update(dt)
 
     if isAnimationPlaying then
         self.animation:update(dt)
+    end
+end
+
+function Player:keypressed(key)
+    if key == 'space' then
+        for _, npc in pairs(self.npcs) do
+            if math.sqrt((npc.x-self.x)^2 + (npc.y-self.y)^2) <= npc.radius + self.radius then
+                npc:callInteractFunction()
+            end
+        end
     end
 end
 
