@@ -1,10 +1,18 @@
 local DialogManager = {}
 DialogManager.__index = DialogManager
 
+function tableConcat(t1,t2)
+    for i=1, #t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
+end
+
 function DialogManager.new()
     local self = setmetatable({}, DialogManager)
 
     self.textSequence = {}
+    self.isSkippingEnabled = true
 
     return self
 end
@@ -13,6 +21,13 @@ function DialogManager:displayText(...)
     for _, text in ipairs({...}) do
         table.insert(self.textSequence, text)
     end
+end
+function DialogManager:forceDisplayText(...)
+    print({...})
+    if #{...} <= 1 then
+        table.insert(self.textSequence, 1, ...)
+    end
+    self.textSequence = tableConcat({...}, self.textSequence)
 end
 function DialogManager:advance()
     if #self.textSequence > 0 then
@@ -43,8 +58,8 @@ function DialogManager:draw()
 end
 
 function DialogManager:keypressed(key)
-    if key == 'space' then
-        DialogManager:advance()
+    if key == 'space' and isSkippingEnabled then
+        self:advance()
     end
 end
 

@@ -7,16 +7,13 @@ local AdditionDialog  = require 'AdditionDialog'
 -- Haiiii justin please send help
 function handleDialog(dialog)
     if type(dialog) == "string" then
+        print(dialog)
         dialogManager.displayText(dialog)
     else
+        print(dialog)
         dialogManager.displayText(dialog.question)
-        QuestionManager.askQuestion(dialog.answers)
+        QuestionManager.askQuestion(dialog.question, dialog.answers, dialog.rightResponse, dialog.wrongResponse)
     end
-end
-function additionDialog()
-    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
-    dialogManager:displayText([[I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have.]])
-    QuestionManager.askQuestion({'blud'})
 end
 
 function love.load()
@@ -24,6 +21,10 @@ function love.load()
     
     player = Player.new(0, 0)
     plusSignNPC = NPC.new(100, 200)    
+
+    for _, dialog in ipairs(AdditionDialog) do
+        handleDialog(dialog)
+    end
 end
 
 function love.update(dt)

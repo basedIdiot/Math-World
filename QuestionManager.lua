@@ -9,7 +9,7 @@ local currentAnswer = ''
 local currentQuestion = ''
 local rightResponse =  ''
 local wrongResponse = ''
-local correctAnswer
+local correctAnswer= ''
 
 love.keyboard.setTextInput(false)
 
@@ -18,25 +18,34 @@ function QuestionManager.askQuestion(question, answers, right, wrong)
     isAskingQuestion = true
     correctAnswer = answers
     currentQuestion = question
-    rightReponse = right
+    rightResponse = right
     wrongResponse = wrong
-
-    dialogManager.displayText(currentQuestion)
+    dialogManager.isSkippingEnabled = false
+    dialogManager:displayText(currentQuestion)
 end
 function QuestionManager.answerQuestion()
     for _, correctAnswer in ipairs(correctAnswer) do
         if string.lower(currentAnswer) == correctAnswer then
+            print("graaa")
+            dialogManager:forceDisplayText(rightResponse)
+            dialogManager:advance()
             QuestionManager.clearQuestion()
+
             return true
         end
     end
-    return false
+    print("bruu")
+    dialogManager:forceDisplayText(wrongResponse, currentQuestion)
+    --dialogManager:advance()
 end
 function QuestionManager.clearQuestion()
     love.keyboard.setTextInput(false)
     isAskingQuestion = false
     currentAnswer = ''
+    currentQuestion = ''
     correctAnswer = ''
+    rightResponse = ''
+    wrongResponse = ''
 end
 function QuestionManager.keypressed(key)
     if not isAskingQuestion then return end
