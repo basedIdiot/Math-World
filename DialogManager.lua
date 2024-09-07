@@ -14,7 +14,11 @@ function DialogManager:displayText(...)
         table.insert(self.textSequence, text)
     end
 end
-
+function DialogManager:advance()
+    if #self.textSequence > 0 then
+        table.remove(self.textSequence, 1)
+    end
+end
 
 function DialogManager:draw()
     if #self.textSequence > 0 then
@@ -39,9 +43,9 @@ function DialogManager:draw()
 end
 
 function DialogManager:keypressed(key)
-    if key == 'space' and #self.textSequence > 0 then
-        table.remove(self.textSequence, 1)
+    if key == 'space' then
+        DialogManager:advance()
     end
 end
 
-return DialogManager
+return DialogManager.new()
