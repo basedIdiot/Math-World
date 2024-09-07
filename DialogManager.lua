@@ -44,7 +44,7 @@ end
 
 function DialogManager:keypressed(key)
     if key == 'space' then
-        DialogManager:advance()
+        self:advance()
     end
 end
 
