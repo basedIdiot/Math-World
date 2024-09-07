@@ -5,40 +5,60 @@ local dialogManager   = require 'DialogManager'
 local AdditionDialog  = require 'AdditionDialog'
 
 -- Haiiii justin please send help
+
+local npcs
+-- Haiiii justin please send help
 function handleDialog(dialog)
     if type(dialog) == "string" then
-        print(dialog)
-        dialogManager.displayText(dialog)
+        dialogManager:displayText(dialog)
     else
-        print(dialog)
-        dialogManager.displayText(dialog.question)
-        QuestionManager.askQuestion(dialog.question, dialog.answers, dialog.rightResponse, dialog.wrongResponse)
+        dialogManager:displayText(dialog.question)
+        QuestionManager.askQuestion(dialog.answers)
     end
+end
+function additionDialog()
+    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
+    dialogManager:displayText([[I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have.]])
+    QuestionManager.askQuestion({'blud'})
 end
 
 function love.load()
     love.graphics.setBackgroundColor(1, 1, 1)
     
-    player = Player.new(0, 0)
-    plusSignNPC = NPC.new(100, 200)    
+    npcs = {
+        plusSignNPC = NPC.new(100, 200, 64, function()
+            dialogManager:displayText("Hello!")
+        end)
+    }
 
-    for _, dialog in ipairs(AdditionDialog) do
-        handleDialog(dialog)
-    end
+    player = Player.new(0, 0, npcs)
+
+    --dialogManager = DialogManager
+    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
+    dialogManager:displayText([[I have two piles of apples. 
+        A pile has one · apple (who said piles must have multiple things?). 
+        The other pile has two ·· apples. 
+        If I put the two piles together, how many apples does the new pile have.]])
+    QuestionManager.askQuestion('blud')
 end
 
 function love.update(dt)
     player:update(dt)
+    -- this code looks kinda bad, but dont worry abt it 
+    player.isPaused = #dialogManager.textSequence > 0
 end
 
 function love.keypressed(key, scancode)
     QuestionManager.keypressed(scancode)
     dialogManager:keypressed(scancode)
+    player:keypressed(scancode)
 end
 
 function love.draw()
     player:draw()
-    plusSignNPC:draw()
+    for _, npc in pairs(npcs) do
+        npc:draw()
+    end
     love.graphics.setColor(0, 0, 0)
     QuestionManager.draw()
     love.graphics.setColor(1, 1, 1)
