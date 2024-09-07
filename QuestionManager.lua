@@ -2,16 +2,26 @@ local QuestionManager = {}
 
 local utf8 = require("utf8")
 
+local dialogManager = require 'DialogManager'
+
 local isAskingQuestion = false
 local currentAnswer = ''
+local currentQuestion = ''
+local rightResponse =  ''
+local wrongResponse = ''
 local correctAnswer
 
-
 love.keyboard.setTextInput(false)
-function QuestionManager.askQuestion(answers)
+
+function QuestionManager.askQuestion(question, answers, right, wrong)
     love.keyboard.setTextInput(true)
     isAskingQuestion = true
     correctAnswer = answers
+    currentQuestion = question
+    rightReponse = right
+    wrongResponse = wrong
+
+    dialogManager.displayText(currentQuestion)
 end
 function QuestionManager.answerQuestion()
     for _, correctAnswer in ipairs(correctAnswer) do

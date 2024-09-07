@@ -1,5 +1,6 @@
 -- First element in array is question, subsequent elements are possible answers
-local additionQuestions = {
+local additionDialog = {
+    'Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!',
     {
         question = [[I have two piles of apples. 
         A pile has one · apple (who said piles must have multiple things?). 
@@ -18,3 +19,5 @@ local additionQuestions = {
     },
 
 }
+
+return additionDialog
