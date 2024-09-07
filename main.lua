@@ -1,5 +1,6 @@
 local Player = require 'Player'
 local NPC = require 'NPC'
+local Question = require 'Question'
 local QuestionManager = require 'QuestionManager'
 local dialogManager   = require 'DialogManager'
 local AdditionDialog  = require 'AdditionDialog'
@@ -9,18 +10,14 @@ local images          = require 'images'
 
 local npcs
 -- Haiiii justin please send help
-function handleDialog(dialog)
-    if type(dialog) == "string" then
+function handleDialog(dialogTable)
+    for _, dialog in ipairs(dialogTable) do
+        if type(dialog) == "table" then
+            dialog = Question.new(dialog.question, dialog.answers, dialog.rightResponse, dialog.wrongResponse)
+        end
+        print(dialog.askQuestion)
         dialogManager:displayText(dialog)
-    else
-        dialogManager:displayText(dialog.question)
-        QuestionManager.askQuestion(dialog.answers)
     end
-end
-function additionDialog()
-    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
-    dialogManager:displayText([[I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have.]])
-    QuestionManager.askQuestion({'blud'})
 end
 
 function love.load()
@@ -28,7 +25,7 @@ function love.load()
     
     npcs = {
         addition = NPC.new(100, 200, 64, images.addition, function()
-            dialogManager:displayText("Hello!")
+            handleDialog(AdditionDialog)
         end),
         subtraction = NPC.new(250, 200, 64, images.subtraction, function()
             dialogManager:displayText("hehehe")
@@ -47,12 +44,6 @@ function love.load()
     player = Player.new(0, 0, npcs)
 
     --dialogManager = DialogManager
-    dialogManager:displayText('Hmmm? Do I know what this paper means? Of course! But I must ask one thing before I say: a good fight!')
-    dialogManager:displayText([[I have two piles of apples. 
-        A pile has one · apple (who said piles must have multiple things?). 
-        The other pile has two ·· apples. 
-        If I put the two piles together, how many apples does the new pile have.]])
-    QuestionManager.askQuestion('blud')
 end
 
 function love.update(dt)
@@ -65,6 +56,9 @@ function love.keypressed(key, scancode)
     QuestionManager.keypressed(scancode)
     dialogManager:keypressed(scancode)
     player:keypressed(scancode)
+end
+function love.textinput(t)
+    dialogManager:textinput(t)
 end
 
 function love.draw()

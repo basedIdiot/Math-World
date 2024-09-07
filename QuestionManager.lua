@@ -9,14 +9,14 @@ local currentAnswer = ''
 local currentQuestion = ''
 local rightResponse =  ''
 local wrongResponse = ''
-local correctAnswer= ''
+local correctAnswers = {}
 
 love.keyboard.setTextInput(false)
 
 function QuestionManager.askQuestion(question, answers, right, wrong)
     love.keyboard.setTextInput(true)
     isAskingQuestion = true
-    correctAnswer = answers
+    correctAnswers = answers
     currentQuestion = question
     rightResponse = right
     wrongResponse = wrong
@@ -24,11 +24,10 @@ function QuestionManager.askQuestion(question, answers, right, wrong)
     dialogManager:displayText(currentQuestion)
 end
 function QuestionManager.answerQuestion()
-    for _, correctAnswer in ipairs(correctAnswer) do
+    for _, correctAnswer in ipairs(correctAnswers) do
         if string.lower(currentAnswer) == correctAnswer then
             print("graaa")
             dialogManager:forceDisplayText(rightResponse)
-            dialogManager:advance()
             QuestionManager.clearQuestion()
 
             return true
@@ -43,7 +42,7 @@ function QuestionManager.clearQuestion()
     isAskingQuestion = false
     currentAnswer = ''
     currentQuestion = ''
-    correctAnswer = ''
+    correctAnswers = {}
     rightResponse = ''
     wrongResponse = ''
 end
