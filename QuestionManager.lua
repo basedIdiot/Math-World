@@ -3,25 +3,32 @@ local QuestionManager = {}
 local utf8 = require("utf8")
 
 local isAskingQuestion = false
-currentQuestion = ''
-currentAnswer = ''
+local currentAnswer = ''
 local correctAnswer
 
 
 love.keyboard.setTextInput(false)
-function QuestionManager.askQuestion(question, answer)
+function QuestionManager.askQuestion(answers)
     love.keyboard.setTextInput(true)
     isAskingQuestion = true
-    currentQuestion = question
-    correctAnswer = answer
+    correctAnswer = answers
 end
 function QuestionManager.answerQuestion()
     love.keyboard.setTextInput(false)
     isAskingQuestion = false
-    if string.lower(currentAnswer) == correctAnswer then
-        return true
+    for _, correctAnswer in ipairs(correctAnswer) do
+        if string.lower(currentAnswer) == correctAnswer then
+            QuestionManager.clearQuestion()
+            return true
+        end
     end
     return false
+end
+function QuestionManager.clearQuestion()
+    love.keyboard.setTextInput(false)
+    isAskingQuestion = false
+    currentAnswer = ''
+    correctAnswer = ''
 end
 function QuestionManager.keypressed(key)
     if not isAskingQuestion then return end
