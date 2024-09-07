@@ -30,7 +30,7 @@ function DialogManager:draw()
         love.graphics.printf(
             self.textSequence[1],
             0 + 25, love.graphics.getHeight() * 0.6 + 25,
-            love.graphics.getWidth() - 50,
+            (love.graphics.getWidth() - 50)/2,
             'left',
             0,
             2, 2

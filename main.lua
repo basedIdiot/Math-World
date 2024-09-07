@@ -1,4 +1,5 @@
 local Player = require 'Player'
+local NPC = require 'NPC'
 local QuestionManager = require 'Question'
 local DialogManager   = require 'DialogManager'
 
@@ -9,8 +10,8 @@ function love.load()
     love.graphics.setBackgroundColor(1, 1, 1)
     
     player = Player.new(0, 0)
+    plusSignNPC = NPC.new(100, 200)
     dialogManager = DialogManager.new()
-    dialogManager:displayText('bruh', 'hehe')
     QuestionManager.askQuestion('bro', 'blud')
 end
 
@@ -25,6 +26,7 @@ end
 
 function love.draw()
     player:draw()
+    plusSignNPC:draw()
     love.graphics.setColor(0, 0, 0)
     QuestionManager.draw()
     love.graphics.setColor(1, 1, 1)
