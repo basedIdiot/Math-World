@@ -19,19 +19,17 @@ end
 function Question:askQuestion()
     love.keyboard.setTextInput(true)
     dialogManager.isSkippingEnabled = false
-    dialogManager:displayText(currentQuestion)
 end
 function Question:answerQuestion()
-    for _, correctAnswer in ipairs(correctAnswers) do
-        if string.lower(currentAnswer) == correctAnswer then
-            print("graaa")
-            dialogManager:forceDisplayText(rightResponse)
+    for _, correctAnswer in ipairs(self.answers) do
+        if string.lower(self.currentAnswer) == correctAnswer then
+            table.remove(dialogManager.textSequence, 1) --Need to remove question from queue because reasons
+            dialogManager:forceDisplayText(self.rightResponse)
             self:endQuestion()
             return true
         end
     end
-    print("bruu")
-    dialogManager:forceDisplayText(wrongResponse, currentQuestion)
+    dialogManager:forceDisplayText(self.wrongResponse, self.question)
     --dialogManager:advance()
 end
 function Question:endQuestion()
@@ -39,9 +37,8 @@ function Question:endQuestion()
     dialogManager.isSkippingEnabled = true
 end
 function Question:keypressed(key)
-    if not isAskingQuestion then return end
     if key == 'backspace' then
-        self.currentAnswer = string.sub(currentAnswer, 1, #self.currentAnswer - 1)
+        self.currentAnswer = string.sub(self.currentAnswer, 1, #self.currentAnswer - 1)
         -- get the byte offset to the last UTF-8 character in the string.
         -- remove the last UTF-8 character.
         -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).

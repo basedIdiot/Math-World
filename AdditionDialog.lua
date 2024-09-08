@@ -9,7 +9,7 @@ local additionDialog = {
         ]], 
         answers = {"three", "3"},
         rightResponse = "Nice work. Remember your counting, and it wil ltake you rather far.",
-        wrongResponse = "Hmmm. I am merciful. Try again. Remember your counting!"
+        wrongResponse = "Hmmm. Try again. Remember your counting!"
     },
     {
         question = [[Ok, same pile of apples from the last question.

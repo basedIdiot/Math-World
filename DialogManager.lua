@@ -57,22 +57,25 @@ function DialogManager:draw()
     if type(self.textSequence[1]) == "table" then
         drawText(self.textSequence[1].question)
         love.graphics.setColor(0, 0, 0)
-        love.graphics.print(self.textSequence[1].currentAnswer, love.graphics.getWidth() / 2, 200)
+        love.graphics.print(self.textSequence[1].currentAnswer, love.graphics.getWidth() / 2, 100)
         love.graphics.setColor(1, 1, 1)
         return
     end
     drawText(self.textSequence[1])
-
 end
 
 function DialogManager:keypressed(key)
     if key == 'space' and self.isSkippingEnabled then
         self:advance()
     end
+    if type(self.textSequence[1]) == "table" then
+        self.textSequence[1]:keypressed(key)
+    end
 end
 function DialogManager:textinput(t)
     if type(self.textSequence[1]) ~= "table" then return end
     self.textSequence[1].currentAnswer  = self.textSequence[1].currentAnswer .. t
+    print(self.textSequence[1].currentAnswer)
 end
 
 return DialogManager.new()
