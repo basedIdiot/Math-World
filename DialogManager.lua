@@ -47,7 +47,7 @@ local function drawText(text)
     love.graphics.printf(
         text,
         0 + 25, love.graphics.getHeight() * 0.6 + 25,
-        (love.graphics.getWidth() - 50)/2,
+        (love.graphics.getWidth() - 50),
         'left',
         0
     )  
