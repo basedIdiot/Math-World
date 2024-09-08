@@ -73,7 +73,9 @@ function DialogManager:keypressed(key)
     end
 end
 function DialogManager:textinput(t)
+    print(self.textSequence[1])
     if type(self.textSequence[1]) ~= "table" then return end
+    print(t)
     self.textSequence[1].currentAnswer  = self.textSequence[1].currentAnswer .. t
     print(self.textSequence[1].currentAnswer)
 end

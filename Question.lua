@@ -30,7 +30,7 @@ function Question:answerQuestion()
         end
     end
     dialogManager:forceDisplayText(self.wrongResponse, self.question)
-    --dialogManager:advance()
+    dialogManager.isSkippingEnabled = true
 end
 function Question:endQuestion()
     love.keyboard.setTextInput(false)
