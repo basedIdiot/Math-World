@@ -108,7 +108,7 @@ function love.draw()
     love.graphics.translate(love.graphics.getWidth()/2 - player.x,
                             love.graphics.getHeight()/2 - player.y)
     
-    love.graphics.draw(images.background, -1000, -1000)
+    love.graphics.draw(images.background, -1000, 0)
     love.graphics.rectangle('fill', -1000, -1000, 1000, 3000)
     love.graphics.rectangle('fill', 1000, -1000, 1000, 3000)
     love.graphics.rectangle('fill', -1000, -1000, 2000, 1000)
