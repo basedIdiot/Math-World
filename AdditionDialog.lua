@@ -10,7 +10,7 @@ local additionDialog = {
 
     '[Addition]: Now, for some practice.',
     {
-        question = "[Addition]: I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have.", 
+        question = "[Addition]: I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have?", 
         answers = {"three", "3"},
         rightResponse = "[Addition]: Nice work. Remember your counting, and it will take you rather far.",
         wrongResponse = "[Addition]: Hmmm. Try again. Remember your counting!"

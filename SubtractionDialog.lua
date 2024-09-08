@@ -18,5 +18,14 @@ local SubtractionDialog = {
     '[Subtraction]: Got that?',
     '[You]: But what if I have to subtract 5 from 3. That would mean OOO - OOOOO, but there aren\'t enough Os to remove.',
     '[Subtraction]: Hmmm. You must become stronger to comprehend such a thing. You must find Multiplication for guidance.',
+    '[Subtraction]: Here\'s a good problem.',
+    {
+        question = "[Subtraction]: I have 3 OOO nice gifts for Addition, but he only takes 1 O gift. How many gifts am I left with?", 
+        answers = {"two", "2"},
+        rightResponse = "[Subtraction]: Nice work.",
+        wrongResponse = "[Subtraction]: Hmmm. Try again. Remember your counting!"
+    },
+    '[You]: Are you just grumbling about Addition not taking your gifts?',
+    '[Subtraction]: What? Absolutely not.'
 }
 return SubtractionDialog
