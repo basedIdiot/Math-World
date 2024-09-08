@@ -12,16 +12,15 @@ local additionDialog = {
     {
         question = "[Addition]: I have two piles of apples. A pile has one · apple (who said piles must have multiple things?). The other pile has two ·· apples. If I put the two piles together, how many apples does the new pile have.", 
         answers = {"three", "3"},
-        rightResponse = "[Addition]: Nice work. Remember your counting, and it wil ltake you rather far.",
+        rightResponse = "[Addition]: Nice work. Remember your counting, and it will take you rather far.",
         wrongResponse = "[Addition]: Hmmm. Try again. Remember your counting!"
     },
     {
         question = "[Addition]: Ok, same pile of apples from the last question. If I add an empty pile of apples, how many apples with the new pile have?", 
-        answers = {"three", "3"},
+        answers = {"zero", "0", "00"},
         rightResponse = "[Addition]: Of course! That's what adding zero (or nothing) does! Some people didn't like zero too much, but they're zero (heh) now.",
         wrongResponse = "[Addition]: Hmmm. What happens to the number of apples if I do nothing to the pile?"
     },
-
 }
 
 return additionDialog

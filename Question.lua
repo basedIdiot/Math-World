@@ -4,7 +4,6 @@ Question.__index = Question
 local dialogManager = require 'DialogManager'
 
 local activeQuestion
-
 function Question.new(question, answers, right, wrong)
     local self = {
         active = false,
@@ -22,7 +21,7 @@ function Question:askQuestion()
 end
 function Question:answerQuestion()
     for _, correctAnswer in ipairs(self.answers) do
-        if string.lower(self.currentAnswer) == correctAnswer then
+        if string.gsub(string.lower(self.currentAnswer), "%s+", "") == correctAnswer then
             table.remove(dialogManager.textSequence, 1) --Need to remove question from queue because reasons
             dialogManager:forceDisplayText(self.rightResponse)
             self:endQuestion()

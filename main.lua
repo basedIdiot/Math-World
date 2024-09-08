@@ -4,6 +4,7 @@ local QuestionManager = require 'QuestionManager'
 local dialogManager   = require 'DialogManager'
 local Question        = require 'Question'
 local AdditionDialog  = require 'AdditionDialog'
+local SubtractionDialog = require 'SubtractionDialog'
 local images          = require 'images'
 
 -- Haiiii justin please send help
@@ -71,7 +72,7 @@ function love.load()
             handleDialog(AdditionDialog)
         end),
         subtraction = NPC.new(575, 200, 64, images.subtraction, function()
-            dialogManager:displayText("hehehe")
+            handleDialog(SubtractionDialog)
         end),
         division = NPC.new(425, 800, 64, images.division, function()
             dialogManager:displayText('bruh')
